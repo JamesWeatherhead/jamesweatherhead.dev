@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Fetch all blog posts and sort by date (newest first)
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) =>
+  b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date);
+}
+---
+
+<BaseLayout title="Blog" description="Explore articles about web development, Astro, and more">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Blog</h1>
+      <p class="text-lg text-gray-600 dark:text-gray-400">
+        Thoughts on web development, design, and technology
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {sortedPosts.map((post) => (
+        <article class="group">
+          <a
+            href={`/blog/${post.slug}`}
+            class="block h-full p-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800/50 hover:border-blue-500 dark:hover:border-blue-400 transition-all hover:shadow-lg"
+          >
+            <div class="mb-3">
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="text-sm text-gray-500 dark:text-gray-400"
+              >
+                {formatDate(post.data.pubDate)}
+              </time>
+            </div>
+
+            <h2 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {post.data.title}
+            </h2>
+
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              {post.data.description}
+            </p>
+
+            {post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {post.data.tags.map((tag) => (
+                  <span class="inline-block px-3 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <div class="mt-4 text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+              Read more →
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {sortedPosts.length === 0 && (
+      <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+        <p class="text-lg">No blog posts yet. Check back soon!</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
