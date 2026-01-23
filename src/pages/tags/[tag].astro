@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Generate static paths for all unique tags
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const uniqueTags = new Set<string>();
+
+  allPosts.forEach(post => {
+    post.data.tags.forEach(tag => {
+      uniqueTags.add(tag.toLowerCase());
+    });
+  });
+
+  return Array.from(uniqueTags).map(tag => ({
+    params: { tag },
+    props: { tagName: tag }
+  }));
+}
+
+const { tag } = Astro.params;
+const { tagName } = Astro.props;
+
+// Get all posts and filter by tag (case-insensitive)
+const allPosts = await getCollection('blog');
+const filteredPosts = allPosts
+  .filter(post => post.data.tags.some(t => t.toLowerCase() === tag))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date);
+}
+
+// Find the original tag name with proper casing
+const displayTag = filteredPosts[0]?.data.tags.find(t => t.toLowerCase() === tag) || tagName;
+---
+
+<BaseLayout title={`Posts tagged: ${displayTag}`} description={`All posts tagged with ${displayTag}`}>
+  <div class="max-w-4xl mx-auto">
+    <!-- Back to all tags -->
+    <div class="mb-8">
+      <a
+        href="/tags"
+        class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
+      >
+        ← Back to all tags
+      </a>
+    </div>
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+        Posts tagged: <span class="text-blue-600 dark:text-blue-400">{displayTag}</span>
+      </h1>
+      <p class="text-lg text-gray-600 dark:text-gray-400">
+        {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'} found
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {filteredPosts.map((post) => (
+        <article class="group">
+          <a
+            href={`/blog/${post.slug}`}
+            class="block h-full p-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800/50 hover:border-blue-500 dark:hover:border-blue-400 transition-all hover:shadow-lg"
+          >
+            <div class="mb-3">
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="text-sm text-gray-500 dark:text-gray-400"
+              >
+                {formatDate(post.data.pubDate)}
+              </time>
+            </div>
+
+            <h2 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {post.data.title}
+            </h2>
+
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              {post.data.description}
+            </p>
+
+            {post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {post.data.tags.map((t) => (
+                  <span class="inline-block px-3 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <div class="mt-4 text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+              Read more →
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
