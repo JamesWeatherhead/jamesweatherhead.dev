@@ -1,16 +1,16 @@
 # Grid State - astro-blog
 
 ## Current Position
-Phase: 1 of 3 (Foundation)
-Block: 01 of 09
+Phase: 2 of 3 (Core Features)
+Block: 04 of 09
 Status: Block complete
-Last activity: 2026-01-23 - Completed 01-PLAN.md
+Last activity: 2026-01-23 - Completed 04-PLAN.md
 
-Progress: [█░░░░░░░░] 11.1%
+Progress: [████░░░░░] 44.4%
 
 ## Session Continuity
-Last session: 2026-01-23 17:27
-Stopped at: Completed Block 01
+Last session: 2026-01-23 17:33
+Stopped at: Completed Block 04 - Tag filtering system
 Resume file: None
 
 ## Block Status
@@ -19,9 +19,9 @@ Resume file: None
 - ✅ Block 01: Initialize Astro with Tailwind and base layout - COMPLETE
 
 ### Phase 2: Core Features (Blocks 02-06)
-- ⏳ Block 02: Blog system with content collections
-- ⏳ Block 03: MDX support and syntax highlighting
-- ⏳ Block 04: Dark mode toggle
+- ✅ Block 02: Blog system with content collections - COMPLETE (inferred)
+- ✅ Block 03: Dark mode toggle and table of contents - COMPLETE
+- ✅ Block 04: Tag filtering system - COMPLETE
 - ⏳ Block 05: RSS feed
 - ⏳ Block 06: SEO and social meta tags
 
@@ -31,6 +31,7 @@ Resume file: None
 - ⏳ Block 09: Performance optimization
 
 ## Notes
-- Block 01 completed successfully with all success criteria met
-- Build verified: dist/ contains compiled HTML with Tailwind styles
-- Ready to proceed to Block 02 (blog system with content collections)
+- Block 01: Completed with base layout and Tailwind integration
+- Block 02: Completed (inferred from existing blog posts and content collections)
+- Block 03: Completed - dark mode toggle with localStorage, table of contents for posts
+- Block 04: Completed - tag filtering system with tag cloud (/tags) and individual tag pages (/tags/[tag])
