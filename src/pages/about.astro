@@ -15,77 +15,102 @@ import { SOCIAL_LINKS } from '../consts';
       <h1 class="about-title">About</h1>
 
       <p class="about-lede">
-        I'm James. I'm an MD/PhD student at the University of Texas Medical Branch, pursuing
-        a PhD in experimental pathology in the automated science track.
+        How do you give a hospital's language model access to the open web without exposing
+        patient data? That is the question driving my PhD at the University of Texas Medical
+        Branch, where I'm an MD/PhD student in experimental pathology on the automated
+        science track.
       </p>
 
     </section>
 
-    <!-- ===== WHAT I BUILD ===== -->
+    <!-- ===== RESEARCH + MENTOR ===== -->
     <section class="about-section">
       <p>
-        I work under Peter McCaffrey, MD, the Chief AI Officer at UTMB. My PhD research focuses
-        on connecting BAA-compliant, HIPAA-compliant LLMs to live web search and tooling like
-        PubMed MCP servers. The core question: how do you make HIPAA-compliant models as capable
-        as frontier models without leaking PHI and breaking HIPAA?
+        My research, supervised by Peter McCaffrey (Chief AI Officer at UTMB), focuses on
+        closing the capability gap between LLMs deployed in HIPAA-governed environments and
+        unrestricted frontier models. The approach: retrieval-augmented generation, medical
+        ontologies, and tool use through the Model Context Protocol, all architected so that
+        protected health information never leaves the compliant perimeter.
       </p>
 
-      <p>Some of what I've built:</p>
-
-      <ul class="about-list">
-        <li>
-          <strong>Safe Search</strong>: a system that connects HIPAA-compliant LLMs to web search
-          to bring back information safely, built using vector stores, ontologies, and OpenAI
-          embedding-003-large. Presented at Perplexity AI headquarters in San Francisco.
-        </li>
-        <li>
-          <strong>PubMed MCP server</strong>: a Model Context Protocol server for PubMed search.
-        </li>
-        <li>
-          <strong>Qualified Health custom GPT</strong>: a HIPAA-compliant GPT that receives PHI
-          documents and identifies PHI using few-shot prompt examples. Built to speed up work for
-          people in the Pathology department and DCLS students. They use it as a first-pass
-          de-identification tool, then take that output to frontier models for patient information
-          analysis.
-        </li>
-        <li>
-          <a href="https://github.com/JamesWeatherhead/receipts" target="_blank" rel="noopener noreferrer">receipts</a>:
-          one sub-agent per reference in your manuscript. Each sub-agent creates a markdown file
-          comparing what you claimed the reference said versus what the reference actually said,
-          with suggestions for how to change your language to accurately reflect the source. An npm
-          package and Claude Code skill.
-        </li>
-        <li>
-          <a href="https://github.com/JamesWeatherhead/ehrsh" target="_blank" rel="noopener noreferrer">ehrsh</a>:
-          structured FHIR queries via natural language.
-        </li>
-        <li>
-          <a href="https://github.com/JamesWeatherhead/asq-phi" target="_blank" rel="noopener noreferrer">ASQ-PHI</a>:
-          a published benchmark of 1,051 synthetic clinical queries with token-level PHI annotations.
-          Published in <em>Data in Brief</em>.
-        </li>
-        <li>
-          <a href="https://github.com/JamesWeatherhead/VibeRad" target="_blank" rel="noopener noreferrer">VibeRad</a>:
-          a DICOM viewer built on Google AI Studio and Gemini for radiology exploration. Submitted
-          to the Google DeepMind Kaggle competition, awaiting results.
-        </li>
-      </ul>
-
       <p>
-        In Summer 2025, I was an AI Researcher at <a href="https://www.thriveaihealth.com/" target="_blank" rel="noopener noreferrer">Thrive AI Health</a> in
-        San Francisco. I've presented at Retool Summit and Perplexity AI HQ.
+        In Summer 2025, I was an AI Researcher at
+        <a href="https://www.thriveaihealth.com/" target="_blank" rel="noopener noreferrer">Thrive AI Health</a>
+        in San Francisco, the preventive health company co-founded by Sam Altman and
+        Arianna Huffington.
       </p>
     </section>
 
-    <!-- ===== BACKGROUND ===== -->
+    <!-- ===== PROJECTS ===== -->
     <section class="about-section">
       <div class="section-marker"></div>
 
-      <p>
-        I was born in London and moved to South Africa at 13, attending Pretoria Boys High School,
-        before coming to the United States on an NCAA tennis scholarship. PhD in experimental
-        pathology, automated science track, expected March 2027. MD through 2029.
-      </p>
+      <ul class="about-list">
+        <li>
+          <a href="https://github.com/JamesWeatherhead/asq-phi" target="_blank" rel="noopener noreferrer"><strong>ASQ-PHI</strong></a>:
+          a benchmark of 1,051 synthetic clinical queries with token-level PHI annotations,
+          published in <em>Data in Brief</em>. Building it forced me to formalize what counts
+          as identifiable at the token level, a definition most detection tools leave implicit.
+        </li>
+        <li>
+          <strong>Safe Search</strong>: a retrieval layer that lets LLMs operating under a
+          signed BAA pull from the open web without exposing PHI. Queries are sanitized using
+          medical ontologies, routed to web search, and results are ranked through a vector
+          store built on <code>text-embedding-3-large</code>. Presented at Perplexity AI
+          headquarters in San Francisco; the core finding is that ontology-guided query
+          rewriting closes most of the retrieval gap without any PHI leaving the system.
+        </li>
+        <li>
+          <strong>Qualified Health de-identification tool</strong>: a PHI de-identification
+          pipeline built on GPT-4 under a signed BAA. Pathology staff and DCLS students at
+          UTMB use it as a first pass: it flags patient data using few-shot prompted detection,
+          and the de-identified output goes to frontier models for clinical analysis. The
+          architecture proved that a two-stage pipeline (compliant model strips PHI, frontier
+          model does the reasoning) is practical for everyday clinical workflows.
+        </li>
+        <li>
+          <a href="https://github.com/JamesWeatherhead/receipts" target="_blank" rel="noopener noreferrer"><strong>receipts</strong></a>:
+          one sub-agent per reference in your manuscript. Each sub-agent reads the cited source,
+          compares it against your claims, and produces a markdown report with suggested
+          corrections. An npm package and Claude Code skill. It exists because citation
+          inaccuracy in scientific papers is quietly widespread, and catching it by hand does
+          not scale.
+        </li>
+        <li>
+          <a href="https://github.com/JamesWeatherhead/ehrsh" target="_blank" rel="noopener noreferrer"><strong>ehrsh</strong></a>:
+          translates natural language into structured FHIR queries against electronic health
+          records. Anyone who has written raw FHIR search URLs knows why this needs to exist.
+        </li>
+        <li>
+          <strong>PubMed MCP server</strong>: gives LLMs structured access to PubMed's 36
+          million citations through the Model Context Protocol, handling search, abstract
+          retrieval, and citation metadata parsing. It closes the loop between literature
+          search and the clinical LLM workflow that Safe Search began.
+        </li>
+        <li>
+          <a href="https://github.com/JamesWeatherhead/VibeRad" target="_blank" rel="noopener noreferrer"><strong>VibeRad</strong></a>:
+          a DICOM viewer built on Google AI Studio and Gemini that generates radiology
+          report drafts from uploaded imaging. Submitted to the Google DeepMind Kaggle
+          competition.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== PRESENTATIONS ===== -->
+    <section class="about-section">
+      <div class="section-marker"></div>
+
+      <h2 class="section-heading">Presentations</h2>
+
+      <ul class="about-list">
+        <li>
+          Retool Summit: building internal AI tools for clinical environments.
+        </li>
+        <li>
+          Perplexity AI HQ, San Francisco: the Safe Search architecture for
+          PHI-safe web retrieval.
+        </li>
+      </ul>
     </section>
 
     <!-- ===== PUBLICATIONS ===== -->
@@ -97,9 +122,20 @@ import { SOCIAL_LINKS } from '../consts';
       <ul class="about-list">
         <li>
           <a href="https://github.com/JamesWeatherhead/asq-phi" target="_blank" rel="noopener noreferrer">ASQ-PHI: A Synthetic Benchmark for PHI Detection at the LLM Boundary</a>.
-          Published in <em>Data in Brief</em>.
+          <em>Data in Brief</em>.
         </li>
       </ul>
+    </section>
+
+    <!-- ===== BACKGROUND ===== -->
+    <section class="about-section">
+      <div class="section-marker"></div>
+
+      <p>
+        I was born in London and moved to South Africa at 13, attending Pretoria Boys High School,
+        before coming to the United States on an NCAA tennis scholarship. I expect to complete
+        my PhD in March 2027 and my MD in 2029.
+      </p>
     </section>
 
     <!-- ===== GET IN TOUCH ===== -->
@@ -107,8 +143,8 @@ import { SOCIAL_LINKS } from '../consts';
       <h2 class="contact-heading">Get in touch</h2>
 
       <p class="contact-text">
-        I'm always open to conversations about medical AI, agent systems, or interesting problems
-        in healthcare. The best way to reach me is email.
+        If you work on clinical AI, health data infrastructure, or de-identification at scale,
+        I would like to hear from you. Email is best.
       </p>
 
       <div class="contact-links">
