@@ -18,18 +18,25 @@ export const PROJECTS = [
     tags: ["hipaa", "phi", "benchmark"],
   },
   {
-    name: "ehrsh",
-    description: "Natural language shell for FHIR R4 EHR systems. Translates plain English commands into structured FHIR API calls (Patient, Observation, MedicationRequest endpoints) so clinicians can query records without writing REST requests.",
-    url: "https://github.com/JamesWeatherhead/ehrsh",
-    status: "active" as const,
-    tags: ["ehr", "fhir", "cli"],
-  },
-  {
     name: "receipts",
     description: "npm package and Claude Code skill for citation verification. Parses manuscript text and source documents, then checks each claim against its cited reference to flag unsupported or mismatched assertions.",
     url: "https://github.com/JamesWeatherhead/receipts",
     status: "active" as const,
     tags: ["claude-code", "citations", "npm"],
+  },
+  {
+    name: "VibeRad",
+    description: "DICOM viewer for radiology education built with Google Gemini. Submitted as an entry for the Kaggle Gemini 3 competition. Supports image exploration and AI-assisted annotation of radiological studies.",
+    url: "https://github.com/JamesWeatherhead/VibeRad",
+    status: "competition" as const,
+    tags: ["dicom", "radiology", "gemini"],
+  },
+  {
+    name: "ehrsh",
+    description: "Natural language shell for FHIR R4 EHR systems. Translates plain English commands into structured FHIR API calls (Patient, Observation, MedicationRequest endpoints) so clinicians can query records without writing REST requests.",
+    url: "https://github.com/JamesWeatherhead/ehrsh",
+    status: "active" as const,
+    tags: ["ehr", "fhir", "cli"],
   },
   {
     name: "k-anonymity-decay",
@@ -44,12 +51,5 @@ export const PROJECTS = [
     url: "https://github.com/JamesWeatherhead/local-phi-scrubber",
     status: "presentation" as const,
     tags: ["chrome-extension", "phi", "local-llm", "amia"],
-  },
-  {
-    name: "VibeRad",
-    description: "DICOM viewer for radiology education built with Google Gemini. Submitted as an entry for the Kaggle Gemini 3 competition. Supports image exploration and AI-assisted annotation of radiological studies.",
-    url: "https://github.com/JamesWeatherhead/VibeRad",
-    status: "competition" as const,
-    tags: ["dicom", "radiology", "gemini"],
   },
 ];
