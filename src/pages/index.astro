@@ -105,7 +105,7 @@ const talks = [
       {latestPosts.length > 0 ? (
         <div class="posts-list">
           {latestPosts.map((post) => (
-            <a href={`/blog/${post.id}`} class="post-row">
+            <a href={`/blog/${post.id.replace(/\.md$/, '')}`} class="post-row">
               <div class="post-meta">
                 <time class="post-date">{formatDate(post.data.pubDate)}</time>
                 {post.data.tags.length > 0 && (

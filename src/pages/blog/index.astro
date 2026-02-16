@@ -33,7 +33,7 @@ function formatDate(date: Date) {
         <div style="display: flex; flex-direction: column; gap: 2rem;">
           {sortedPosts.map((post) => (
             <a
-              href={`/blog/${post.id}`}
+              href={`/blog/${post.id.replace(/\.md$/, '')}`}
               class="project-card"
               style="text-decoration: none; color: inherit; display: block;"
             >
