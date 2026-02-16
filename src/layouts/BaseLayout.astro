@@ -28,15 +28,16 @@ const fullTitle = title === "James Weatherhead"
     <meta name="generator" content={Astro.generator} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description || 'James Weatherhead. MD/PhD at UTMB building tools for clinical AI.'} />
+    <meta property="og:site_name" content="James Weatherhead" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description || 'James Weatherhead. MD/PhD at UTMB building tools for clinical AI.'} />
 
     <title>{fullTitle}</title>
 
