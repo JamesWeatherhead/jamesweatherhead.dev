@@ -17,71 +17,12 @@ function formatDate(date: Date) {
   }).format(date);
 }
 
-const timeline = [
-  {
-    years: '2023 ~ Present',
-    org: 'University of Texas Medical Branch',
-    location: 'Galveston, TX',
-    role: 'MD/PhD/MPH Student',
-    description:
-      'PhD in Pathology & Experimental Pathology under Peter McCaffrey, MD (Chief AI Officer). Building AI tools for clinical systems.',
-  },
-  {
-    years: 'Summer 2025',
-    org: 'Thrive AI Health',
-    location: 'San Francisco, CA',
-    role: 'AI Researcher',
-    description: 'AI health coaching platform.',
-  },
-  {
-    years: '2021',
-    org: "St. Mary's University",
-    location: 'San Antonio, TX',
-    role: 'BS Biology, Minor Chemistry',
-    description:
-      'NCAA Tennis. Research: anti-cancer drugs on pediatric sarcoma cell lines.',
-  },
-  {
-    years: '2019 ~ 2021',
-    org: 'University of Indianapolis',
-    location: 'Indianapolis, IN',
-    role: 'Tennis Scholarship',
-    description: "Transferred to St. Mary's.",
-  },
-  {
-    years: '2008 ~ 2017',
-    org: 'Pretoria Boys High School',
-    location: 'South Africa',
-    role: '',
-    description: '',
-  },
-  {
-    years: 'Born',
-    org: 'London, England',
-    location: '',
-    role: '',
-    description: 'Lived there 13 years.',
-  },
-];
-
 const talks = [
   {
     title: 'Building Clinical AI Tools',
     event: 'Retool Summit',
     videoUrl: 'https://www.youtube.com/watch?v=Di7O9hJg1aM',
     thumbnail: 'https://img.youtube.com/vi/Di7O9hJg1aM/maxresdefault.jpg',
-  },
-  {
-    title: 'Semantic Search for Clinicians',
-    event: 'Perplexity AI HQ, San Francisco',
-    videoUrl: null,
-    thumbnail: null,
-  },
-  {
-    title: 'AI in Clinical Pathology',
-    event: 'Digital Pathology Association Conference',
-    videoUrl: null,
-    thumbnail: null,
   },
 ];
 ---
@@ -132,68 +73,23 @@ const talks = [
       </div>
     </section>
 
-    <!-- ===== BIO ===== -->
-    <section class="bio-section">
-      <p class="bio-text">
-        I am an MD/PhD student at UTMB building AI tools for clinical medicine.
-        My PhD focuses on applying language models to pathology and clinical decision support,
-        working under the Chief AI Officer. I have competed in NCAA tennis, published research
-        on pediatric sarcoma, and built open-source tools for EHR systems, clinical search,
-        and privacy-preserving AI. Originally from London, raised in South Africa.
-      </p>
-    </section>
-
-    <!-- ===== TIMELINE ===== -->
-    <section class="section">
-      <h2 class="section-heading">Timeline</h2>
-      <div class="timeline">
-        {timeline.map((entry) => (
-          <div class="timeline-entry">
-            <div class="timeline-left">
-              <span class="timeline-years">{entry.years}</span>
-            </div>
-            <div class="timeline-dot-col">
-              <div class="timeline-dot" />
-              <div class="timeline-line" />
-            </div>
-            <div class="timeline-right">
-              <div class="timeline-org">{entry.org}</div>
-              {entry.location && <div class="timeline-location">{entry.location}</div>}
-              {entry.role && <div class="timeline-role">{entry.role}</div>}
-              {entry.description && <p class="timeline-desc">{entry.description}</p>}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
     <!-- ===== FEATURED TALKS ===== -->
     <section class="section">
       <h2 class="section-heading">Talks</h2>
       <div class="talks-grid">
         {talks.map((talk) => (
           <div class="talk-card">
-            {talk.thumbnail && talk.videoUrl ? (
-              <a href={talk.videoUrl} target="_blank" rel="noopener noreferrer" class="talk-thumbnail-link">
-                <div class="talk-thumbnail-wrapper">
-                  <img src={talk.thumbnail} alt={talk.title} class="talk-thumbnail" loading="lazy" />
-                  <div class="play-overlay">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                      <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.6)" />
-                      <polygon points="19,15 35,24 19,33" fill="white" />
-                    </svg>
-                  </div>
+            <a href={talk.videoUrl} target="_blank" rel="noopener noreferrer" class="talk-thumbnail-link">
+              <div class="talk-thumbnail-wrapper">
+                <img src={talk.thumbnail} alt={talk.title} class="talk-thumbnail" loading="lazy" />
+                <div class="play-overlay">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.6)" />
+                    <polygon points="19,15 35,24 19,33" fill="white" />
+                  </svg>
                 </div>
-              </a>
-            ) : (
-              <div class="talk-thumbnail-wrapper talk-placeholder">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="placeholder-icon">
-                  <rect x="2" y="3" width="20" height="14" rx="2" />
-                  <path d="M8 21h8" />
-                  <path d="M12 17v4" />
-                </svg>
               </div>
-            )}
+            </a>
             <div class="talk-info">
               <h3 class="talk-title">{talk.title}</h3>
               <span class="talk-event">{talk.event}</span>
@@ -322,21 +218,6 @@ const talks = [
     background-color: rgba(255, 255, 255, 0.06);
   }
 
-  /* ===== BIO ===== */
-  .bio-section {
-    padding: 0 0 3rem;
-    text-align: center;
-  }
-
-  .bio-text {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: var(--color-text-secondary);
-    margin: 0 auto;
-    max-width: 580px;
-  }
-
   /* ===== SECTION SHARED ===== */
   .section {
     padding: 2.5rem 0;
@@ -354,103 +235,13 @@ const talks = [
     text-align: center;
   }
 
-  /* ===== TIMELINE ===== */
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .timeline-entry {
-    display: grid;
-    grid-template-columns: 140px 24px 1fr;
-    gap: 0 0.75rem;
-    min-height: 72px;
-  }
-
-  .timeline-left {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    padding-top: 2px;
-  }
-
-  .timeline-years {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--color-text-secondary);
-    white-space: nowrap;
-    letter-spacing: 0.02em;
-  }
-
-  .timeline-dot-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-
-  .timeline-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--color-accent);
-    flex-shrink: 0;
-    margin-top: 5px;
-  }
-
-  .timeline-line {
-    width: 1px;
-    flex: 1;
-    background-color: var(--color-border);
-    margin-top: 4px;
-  }
-
-  .timeline-entry:last-child .timeline-line {
-    display: none;
-  }
-
-  .timeline-right {
-    padding-bottom: 1.5rem;
-  }
-
-  .timeline-org {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 1rem;
-    color: var(--color-text-primary);
-    line-height: 1.3;
-  }
-
-  .timeline-location {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--color-text-secondary);
-    margin-top: 0.15rem;
-    letter-spacing: 0.02em;
-  }
-
-  .timeline-role {
-    font-family: var(--font-body);
-    font-size: 0.92rem;
-    color: var(--color-accent);
-    margin-top: 0.25rem;
-    font-weight: 500;
-  }
-
-  .timeline-desc {
-    font-family: var(--font-body);
-    font-size: 0.88rem;
-    color: var(--color-text-secondary);
-    margin: 0.3rem 0 0;
-    line-height: 1.55;
-  }
-
   /* ===== TALKS GRID ===== */
   .talks-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.25rem;
+    max-width: 480px;
+    margin: 0 auto;
   }
 
   .talk-card {
@@ -495,17 +286,6 @@ const talks = [
 
   .talk-thumbnail-link:hover .play-overlay {
     opacity: 1;
-  }
-
-  .talk-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .placeholder-icon {
-    color: var(--color-text-secondary);
-    opacity: 0.4;
   }
 
   .talk-info {
@@ -662,30 +442,6 @@ const talks = [
 
     .hero-tagline {
       font-size: 1rem;
-    }
-
-    .timeline-entry {
-      grid-template-columns: 1fr;
-      gap: 0;
-      padding-left: 2rem;
-      position: relative;
-    }
-
-    .timeline-left {
-      justify-content: flex-start;
-      padding-top: 0;
-    }
-
-    .timeline-dot-col {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-    }
-
-    .talks-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
     }
 
     .post-row {

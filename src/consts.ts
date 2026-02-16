@@ -1,5 +1,5 @@
 export const SITE_TITLE = "James Weatherhead";
-export const SITE_DESCRIPTION = "MD/PhD student. I build AI agents for medicine and for thinking.";
+export const SITE_DESCRIPTION = "MD/PhD student building AI agents for medicine.";
 export const SITE_URL = "https://jamesweatherhead.com";
 export const SOCIAL_LINKS = {
   github: "https://github.com/JamesWeatherhead",
