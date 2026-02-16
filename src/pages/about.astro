@@ -15,45 +15,17 @@ import { SOCIAL_LINKS } from '../consts';
       <h1 class="about-title">About</h1>
 
       <p class="about-lede">
-        I'm James Weatherhead. I'm an MD/PhD/MPH student at the University of Texas Medical Branch
-        in Galveston, Texas. I build AI tools that work inside hospital systems, and I spend a lot
-        of time thinking about what happens when agents start doing real work autonomously.
+        I build AI tools that work inside hospital systems. Semantic search for clinicians,
+        citation verification for researchers, natural language interfaces for EHRs. These are
+        deployed, not theoretical.
       </p>
     </section>
 
-    <!-- ===== ORIGINS ===== -->
+    <!-- ===== WHAT I BUILD ===== -->
     <section class="about-section">
       <p>
-        I was born in London and lived there for 13 years before moving to Pretoria, South Africa,
-        where I attended Pretoria Boys High School. I came to the United States on a tennis
-        scholarship, first to the University of Indianapolis, then transferring to St. Mary's
-        University in San Antonio where I played NCAA tennis. I graduated in 2021 with a BS in
-        Biology and a minor in Chemistry.
-      </p>
-
-      <p>
-        Research started early for me. At St. Mary's, I was testing anti-cancer drugs on pediatric
-        sarcoma cell lines. Then I moved to UT Dell Medical School and ran a meta-analysis on deep
-        brain stimulation. I co-founded a STEM outreach organization and spent time volunteering at
-        the San Antonio Food Bank during COVID. That period clarified things. I wanted to be in
-        medicine, but I also wanted to build.
-      </p>
-    </section>
-
-    <!-- ===== THE INTERSECTION ===== -->
-    <section class="about-section">
-      <div class="section-marker"></div>
-
-      <p>
-        At UTMB, I found the intersection that drives everything I do now: medicine and AI.
-        My PhD work is in Pathology and Experimental Pathology (expected June 2027), and I'm
-        simultaneously pursuing my MD (through 2029) and MPH. I started building tools almost
-        immediately.
-      </p>
-
-      <p>
-        I work under Peter McCaffrey, MD, who serves as Chief AI Officer at UTMB. Together we're
-        building AI systems for clinical use. Some of what I've built or am building:
+        I work under Peter McCaffrey, MD, Chief AI Officer at UTMB, building AI systems for
+        clinical use. Some of what I've built or am building:
       </p>
 
       <ul class="about-list">
@@ -89,42 +61,45 @@ import { SOCIAL_LINKS } from '../consts';
         In Summer 2025, I was an AI Researcher at <a href="https://www.thrive.ai" target="_blank" rel="noopener noreferrer">Thrive AI Health</a> in
         San Francisco, an AI health coaching platform that helps people build personalized health
         habits. I've presented at Retool Summit, Perplexity AI HQ, and the Digital Pathology
-        Association Conference. I participated in the UTMB-Microsoft AI Hackathon building
-        NLP-based medical imaging cohort discovery.
+        Association Conference.
       </p>
     </section>
 
-    <!-- ===== WHAT DRIVES HIM ===== -->
+    <!-- ===== BACKGROUND ===== -->
     <section class="about-section">
       <div class="section-marker"></div>
 
       <p>
-        Here is what I actually care about: I want to build an AI agent that anyone can use for
-        their health. Including my mom. That's the bar.
-      </p>
-
-      <p>
-        I believe the future is multi-agent, and that medical AI needs people who understand both
-        the clinical reality and the technical frontier. I'm not interested in building AI wrappers.
-        I'm interested in building AI that works inside the messy, regulated, high-stakes world of
-        real healthcare. The kind where a wrong answer has consequences and "good enough" isn't.
+        I grew up in London and South Africa before coming to the US. I'm now an MD/PhD/MPH student
+        at the University of Texas Medical Branch in Galveston. PhD in Pathology and Experimental
+        Pathology (expected June 2027), MD through 2029.
       </p>
     </section>
 
-    <!-- ===== BEYOND THE WORK ===== -->
+    <!-- ===== WHAT DRIVES ME ===== -->
     <section class="about-section">
       <div class="section-marker"></div>
 
       <p>
-        Beyond the research and the code: I co-founded and co-lead the AI in Medicine Student
-        Organization at UTMB. I organize coding camps for K-12 students. I volunteer at
-        St. Vincent's Hope Clinic and with Street Medicine. I've served on the AMA Committee on
-        Health Information Technology and as a TMA Delegate.
+        I want to build an AI agent that anyone can use for their health. That is the goal.
+        Medical AI needs people who understand both the clinical reality and the technical frontier.
+        I'm building AI that works inside the messy, regulated, high-stakes world of real healthcare,
+        where a wrong answer has consequences and "good enough" isn't.
       </p>
+    </section>
 
-      <p>
-        I played competitive tennis for years. I grew up between London and South Africa. I now live in Galveston, Texas.
-      </p>
+    <!-- ===== PUBLICATIONS ===== -->
+    <section class="about-section">
+      <div class="section-marker"></div>
+
+      <h2 class="section-heading">Publications</h2>
+
+      <ul class="about-list">
+        <li>
+          <a href="https://github.com/JamesWeatherhead/asq-phi" target="_blank" rel="noopener noreferrer">ASQ-PHI: A Synthetic Benchmark for PHI Detection at the LLM Boundary</a>.
+          Published in <em>Data in Brief</em>.
+        </li>
+      </ul>
     </section>
 
     <!-- ===== GET IN TOUCH ===== -->
@@ -283,6 +258,16 @@ import { SOCIAL_LINKS } from '../consts';
   :global(.dark) .section-marker {
     background: rgba(74, 158, 255, 0.25);
     box-shadow: 0 0 8px rgba(74, 158, 255, 0.1);
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 1rem 0;
   }
 
   /* ===== LISTS ===== */

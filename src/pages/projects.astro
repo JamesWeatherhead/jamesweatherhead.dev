@@ -2,6 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { PROJECTS } from '../consts';
 
+const toolNames = ['ehrsh', 'receipts', 'VibeRad'];
+const researchNames = ['ASQ-PHI', 'k-anonymity-decay', 'local-phi-scrubber'];
+
+const tools = PROJECTS.filter(p => toolNames.includes(p.name));
+const research = PROJECTS.filter(p => researchNames.includes(p.name));
+
 function getStatusClass(status: string): string {
   const map: Record<string, string> = {
     active: 'status-active',
@@ -13,7 +19,7 @@ function getStatusClass(status: string): string {
 }
 ---
 
-<BaseLayout title="Projects" description="Open source tools and research projects in clinical AI, privacy, and agent systems.">
+<BaseLayout title="Projects" description="Open source tools and research for clinical AI and patient privacy.">
   <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
 
     <section style="padding: 4rem 0 2rem; max-width: 720px;">
@@ -21,47 +27,98 @@ function getStatusClass(status: string): string {
         Projects
       </h1>
       <p style="font-family: var(--font-body); font-size: 1.05rem; color: var(--color-text-secondary); margin: 0; line-height: 1.6;">
-        Open source tools, research datasets, and experiments in clinical AI, privacy, and autonomous agents.
+        Open source tools and research for clinical AI and patient privacy.
       </p>
     </section>
 
-    <section style="padding: 1rem 0 4rem;">
-      <div
-        class="project-grid"
-        style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;"
-      >
-        {PROJECTS.map((project) => (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="project-card"
-            style="text-decoration: none; color: inherit; display: block;"
-          >
-            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
-              <span
-                style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--color-text-primary);"
-              >
-                {project.name}
-              </span>
-              <span class={`status-badge ${getStatusClass(project.status)}`}>
-                {project.status}
-              </span>
-            </div>
-            <p
-              style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin: 0 0 0.75rem 0; line-height: 1.5;"
+    {tools.length > 0 && (
+      <section style="padding: 1rem 0 2rem;">
+        <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.4rem; color: var(--color-text-primary); margin: 0 0 1rem 0;">
+          Tools
+        </h2>
+        <div
+          class="project-grid"
+          style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;"
+        >
+          {tools.map((project) => (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-card"
+              style="text-decoration: none; color: inherit; display: block;"
             >
-              {project.description}
-            </p>
-            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-              {project.tags.map((tag) => (
-                <span class="tag-pill">{tag}</span>
-              ))}
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
+              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                <span
+                  style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--color-text-primary);"
+                >
+                  {project.name}
+                </span>
+                <span class={`status-badge ${getStatusClass(project.status)}`}>
+                  {project.status}
+                </span>
+              </div>
+              <p
+                style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin: 0 0 0.75rem 0; line-height: 1.5;"
+              >
+                {project.description}
+              </p>
+              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                {project.tags.map((tag) => (
+                  <span class="tag-pill">{tag}</span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {research.length > 0 && (
+      <section style="padding: 1rem 0 4rem;">
+        <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.4rem; color: var(--color-text-primary); margin: 0 0 0.5rem 0;">
+          Research
+        </h2>
+        <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin: 0 0 1rem 0; line-height: 1.5;">
+          A coordinated research program on PHI protection and re-identification risk in LLM-based clinical systems.
+        </p>
+        <div
+          class="project-grid"
+          style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;"
+        >
+          {research.map((project) => (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-card"
+              style="text-decoration: none; color: inherit; display: block;"
+            >
+              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                <span
+                  style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--color-text-primary);"
+                >
+                  {project.name}
+                </span>
+                <span class={`status-badge ${getStatusClass(project.status)}`}>
+                  {project.status}
+                </span>
+              </div>
+              <p
+                style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin: 0 0 0.75rem 0; line-height: 1.5;"
+              >
+                {project.description}
+              </p>
+              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                {project.tags.map((tag) => (
+                  <span class="tag-pill">{tag}</span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
 
   </div>
 </BaseLayout>
