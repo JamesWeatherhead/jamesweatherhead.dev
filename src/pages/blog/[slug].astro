@@ -82,6 +82,26 @@ function formatDate(date: Date) {
 </BaseLayout>
 
 <style>
+  .article-content :global(figure.float-right) {
+    float: right;
+    max-width: 280px;
+    margin: 0.25rem 0 1rem 1.5rem;
+  }
+
+  .article-content :global(figure.float-right img) {
+    width: 100%;
+    border-radius: 6px;
+    display: block;
+  }
+
+  .article-content :global(figure.float-right figcaption) {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.4rem;
+    text-align: center;
+  }
+
   .article-content :global(img.float-right) {
     float: right;
     max-width: 280px;
@@ -107,6 +127,12 @@ function formatDate(date: Date) {
     .article-content :global(img.float-left) {
       float: none;
       display: block;
+      max-width: 100%;
+      margin: 1rem 0;
+    }
+
+    .article-content :global(figure.float-right) {
+      float: none;
       max-width: 100%;
       margin: 1rem 0;
     }
