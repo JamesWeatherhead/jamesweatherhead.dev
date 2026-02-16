@@ -251,8 +251,11 @@ const talks = [
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 5rem 0 3rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 2rem 0;
   }
 
   .hero-photo-wrapper {
@@ -648,7 +651,9 @@ const talks = [
   /* ===== RESPONSIVE ===== */
   @media (max-width: 640px) {
     .hero {
-      padding: 3.5rem 0 2rem;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 2rem 0;
     }
 
     .hero-name {
