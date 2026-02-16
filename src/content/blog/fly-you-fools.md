@@ -15,7 +15,7 @@ The paper was published in March 2023. By November 2023, GPT-4 matched or exceed
 
 The Balrog won.
 
-<figure class="float-right"><img src="/blog/bonfire.jpg" alt="Standing by the bonfire on my PI's farm" /><figcaption>Bonfire on my PI's farm.</figcaption></figure>
+<figure class="float-right"><img src="/blog/bonfire.jpg" alt="Standing by the bonfire on my PI's farm" /><figcaption>Bonfire on my principal investigator's farm.</figcaption></figure>
 
 ## The Graveyard
 
