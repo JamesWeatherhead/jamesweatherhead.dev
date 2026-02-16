@@ -82,17 +82,34 @@ function formatDate(date: Date) {
 </BaseLayout>
 
 <style>
-  .hero-image-wrapper {
-    margin: 1rem 0 2rem;
-    border-radius: 8px;
-    overflow: hidden;
-    max-width: 480px;
+  .article-content :global(img.float-right) {
+    float: right;
+    max-width: 280px;
+    margin: 0.25rem 0 1rem 1.5rem;
+    border-radius: 6px;
   }
 
-  .hero-image {
-    width: 100%;
-    height: auto;
-    display: block;
+  .article-content :global(img.float-left) {
+    float: left;
+    max-width: 280px;
+    margin: 0.25rem 1.5rem 1rem 0;
+    border-radius: 6px;
+  }
+
+  .article-content::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  @media (max-width: 640px) {
+    .article-content :global(img.float-right),
+    .article-content :global(img.float-left) {
+      float: none;
+      display: block;
+      max-width: 100%;
+      margin: 1rem 0;
+    }
   }
 
   .article-content :global(h1),
