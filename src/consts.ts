@@ -40,10 +40,10 @@ export const PROJECTS = [
   },
   {
     name: "local-phi-scrubber",
-    description: "Chrome extension for on-device PHI redaction. Runs Phi-3 Mini locally via Ollama to identify and strip protected health information from text before it leaves the browser. No data sent to external servers.",
+    description: "Chrome extension for on-device PHI redaction. Runs Phi-3 Mini locally via Ollama to identify and strip protected health information from text before it leaves the browser. No data sent to external servers. Oral presentation at AMIA Amplify Informatics Conference, May 2026, Denver, CO.",
     url: "https://github.com/JamesWeatherhead/local-phi-scrubber",
-    status: "active" as const,
-    tags: ["chrome-extension", "phi", "local-llm"],
+    status: "presentation" as const,
+    tags: ["chrome-extension", "phi", "local-llm", "amia"],
   },
   {
     name: "VibeRad",

@@ -23,6 +23,7 @@
   --color-status-active: #0F6B8A;
   --color-status-published: #B45309;
   --color-status-competition: #7C3AED;
+  --color-status-presentation: #059669;
   --color-status-research: #6B7280;
 
   /* Spacing */
@@ -54,6 +55,7 @@
   --color-status-active: #4A9EFF;
   --color-status-published: #F59E0B;
   --color-status-competition: #A78BFA;
+  --color-status-presentation: #34D399;
   --color-status-research: #9CA3AF;
 }
 
@@ -196,6 +198,11 @@ a:hover {
   color: var(--color-status-competition);
 }
 
+.status-presentation {
+  background: rgba(5, 150, 105, 0.1);
+  color: var(--color-status-presentation);
+}
+
 .status-research {
   background: rgba(107, 114, 128, 0.1);
   color: var(--color-status-research);
@@ -211,6 +218,10 @@ a:hover {
 
 .dark .status-competition {
   background: rgba(167, 139, 250, 0.1);
+}
+
+.dark .status-presentation {
+  background: rgba(52, 211, 153, 0.1);
 }
 
 .dark .status-research {
