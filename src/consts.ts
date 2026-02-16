@@ -3,7 +3,6 @@ export const SITE_DESCRIPTION = "MD/PhD at UTMB. I build tools for clinical AI a
 export const SITE_URL = "https://jamesweatherhead.com";
 export const SOCIAL_LINKS = {
   github: "https://github.com/JamesWeatherhead",
-  twitter: "https://x.com/jweatherhead_",
   linkedin: "https://www.linkedin.com/in/james-weatherhead-7ab4b9321/",
   kaggle: "https://www.kaggle.com/competitions/gemini-3/writeups/new-writeup-1765065566929",
   mendeley: "https://data.mendeley.com/datasets/csz5dzp7nx/1",
@@ -19,14 +18,14 @@ export const PROJECTS = [
   },
   {
     name: "receipts",
-    description: "npm package and Claude Code skill for citation verification. Parses manuscript text and source documents, then checks each claim against its cited reference to flag unsupported or mismatched assertions.",
+    description: "npm package and Claude Code skill for citation verification. Spawns one sub-agent per reference in your manuscript. Each sub-agent creates a markdown file comparing what you claimed the reference said versus what the reference actually said, with suggestions for correcting your language to match the source.",
     url: "https://github.com/JamesWeatherhead/receipts",
     status: "active" as const,
     tags: ["claude-code", "citations", "npm"],
   },
   {
     name: "VibeRad",
-    description: "DICOM viewer for radiology education built with Google Gemini. Submitted as an entry for the Kaggle Gemini 3 competition. Supports image exploration and AI-assisted annotation of radiological studies.",
+    description: "DICOM viewer built on Google AI Studio and Gemini for radiology exploration. Submitted to the Google DeepMind Kaggle competition, awaiting results.",
     url: "https://github.com/JamesWeatherhead/VibeRad",
     status: "competition" as const,
     tags: ["dicom", "radiology", "gemini"],

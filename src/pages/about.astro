@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { SOCIAL_LINKS } from '../consts';
 ---
 
-<BaseLayout title="About" description="James Weatherhead — MD/PhD/MPH student at UTMB building AI tools for medicine.">
+<BaseLayout title="About" description="James Weatherhead — MD/PhD student at UTMB building AI tools for medicine.">
   <div class="about-container">
 
     <!-- ===== INTRO SECTION ===== -->
@@ -15,9 +15,8 @@ import { SOCIAL_LINKS } from '../consts';
       <h1 class="about-title">About</h1>
 
       <p class="about-lede">
-        I'm an MD/PhD/MPH student at UTMB building AI tools for clinical medicine. Semantic
-        search for clinicians, citation verification for researchers, natural language interfaces
-        for EHRs. Still in the lab, shipping toward the ward.
+        I'm James. I'm an MD/PhD student at the University of Texas Medical Branch, pursuing
+        a PhD in experimental pathology in the automated science track.
       </p>
 
     </section>
@@ -25,44 +24,56 @@ import { SOCIAL_LINKS } from '../consts';
     <!-- ===== WHAT I BUILD ===== -->
     <section class="about-section">
       <p>
-        I work under Peter McCaffrey, MD, Chief AI Officer at UTMB, building AI systems for
-        clinical use. Some of what I've built or am building:
+        I work under Peter McCaffrey, MD, the Chief AI Officer at UTMB. My PhD research focuses
+        on connecting BAA-compliant, HIPAA-compliant LLMs to live web search and tooling like
+        PubMed MCP servers. The core question: how do you make HIPAA-compliant models as capable
+        as frontier models without leaking PHI and breaking HIPAA?
       </p>
+
+      <p>Some of what I've built:</p>
 
       <ul class="about-list">
         <li>
-          A semantic search tool for clinicians to find medical content using natural language.
-          Presented at Perplexity AI headquarters in San Francisco.
+          <strong>Safe Search</strong>: a system that connects HIPAA-compliant LLMs to web search
+          to bring back information safely, built using vector stores, ontologies, and OpenAI
+          embedding-003-large. Presented at Perplexity AI headquarters in San Francisco.
         </li>
         <li>
-          A literature retrieval pipeline that pulls relevant references for specific patient
-          cases, used by our Pathology Department for clinical decisions.
+          <strong>PubMed MCP server</strong>: a Model Context Protocol server for PubMed search.
+        </li>
+        <li>
+          <strong>Qualified Health custom GPT</strong>: a HIPAA-compliant GPT that receives PHI
+          documents and identifies PHI using few-shot prompt examples. Built to speed up work for
+          people in the Pathology department and DCLS students. They use it as a first-pass
+          de-identification tool, then take that output to frontier models for patient information
+          analysis.
         </li>
         <li>
           <a href="https://github.com/JamesWeatherhead/receipts" target="_blank" rel="noopener noreferrer">receipts</a>:
-          citation verification for Claude Code. Reads your manuscript and sources, flags where
-          claims and references don't match.
+          one sub-agent per reference in your manuscript. Each sub-agent creates a markdown file
+          comparing what you claimed the reference said versus what the reference actually said,
+          with suggestions for how to change your language to accurately reflect the source. An npm
+          package and Claude Code skill.
         </li>
         <li>
           <a href="https://github.com/JamesWeatherhead/ehrsh" target="_blank" rel="noopener noreferrer">ehrsh</a>:
-          a natural language shell for FHIR-based EHR systems. Plain English in, structured API calls out.
+          structured FHIR queries via natural language.
         </li>
         <li>
           <a href="https://github.com/JamesWeatherhead/asq-phi" target="_blank" rel="noopener noreferrer">ASQ-PHI</a>:
-          a synthetic benchmark of 1,051 PHI-annotated clinical queries for evaluating
-          de-identification at the LLM boundary. Published in <em>Data in Brief</em>.
+          a published benchmark of 1,051 synthetic clinical queries with token-level PHI annotations.
+          Published in <em>Data in Brief</em>.
         </li>
         <li>
           <a href="https://github.com/JamesWeatherhead/VibeRad" target="_blank" rel="noopener noreferrer">VibeRad</a>:
-          a DICOM viewer built on Google AI Studio and Gemini for radiology exploration.
+          a DICOM viewer built on Google AI Studio and Gemini for radiology exploration. Submitted
+          to the Google DeepMind Kaggle competition, awaiting results.
         </li>
       </ul>
 
       <p>
         In Summer 2025, I was an AI Researcher at <a href="https://www.thriveaihealth.com/" target="_blank" rel="noopener noreferrer">Thrive AI Health</a> in
-        San Francisco, an AI health coaching platform that helps people build personalized health
-        habits. I've presented at Retool Summit, Perplexity AI HQ, and the Digital Pathology
-        Association Conference.
+        San Francisco. I've presented at Retool Summit and Perplexity AI HQ.
       </p>
     </section>
 
@@ -71,21 +82,9 @@ import { SOCIAL_LINKS } from '../consts';
       <div class="section-marker"></div>
 
       <p>
-        I grew up in London and South Africa before coming to the US. I'm now an MD/PhD/MPH student
-        at the University of Texas Medical Branch in Galveston. PhD in Pathology and Experimental
-        Pathology (expected June 2027), MD through 2029.
-      </p>
-    </section>
-
-    <!-- ===== WHAT DRIVES ME ===== -->
-    <section class="about-section">
-      <div class="section-marker"></div>
-
-      <p>
-        I want to build an AI agent that anyone can use for their health. That is the goal.
-        Medical AI needs people who understand both the clinical reality and the technical frontier.
-        I'm building AI that works inside the messy, regulated, high-stakes world of real healthcare,
-        where a wrong answer has consequences and "good enough" isn't.
+        I was born in London and moved to South Africa at 13, attending Pretoria Boys High School,
+        before coming to the United States on an NCAA tennis scholarship. PhD in experimental
+        pathology, automated science track, expected March 2027. MD through 2029.
       </p>
     </section>
 
@@ -131,17 +130,6 @@ import { SOCIAL_LINKS } from '../consts';
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-          </a>
-          <a
-            href={SOCIAL_LINKS.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-link"
-            aria-label="X (Twitter)"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
             </svg>
           </a>
           <a
