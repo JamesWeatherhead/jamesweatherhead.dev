@@ -16,6 +16,8 @@ The paper was published in March 2023. By November 2023, GPT-4 matched or exceed
 
 The Balrog won.
 
+![Watching it burn](/blog/bonfire.jpg)
+
 ## The Graveyard
 
 BloombergGPT is the canonical cautionary tale, but the real story is more nuanced than the headlines suggest.
