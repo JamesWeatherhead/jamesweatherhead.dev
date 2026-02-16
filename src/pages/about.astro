@@ -1,0 +1,396 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SOCIAL_LINKS } from '../consts';
+---
+
+<BaseLayout title="About" description="James Weatherhead — MD/PhD/MPH student at UTMB building AI tools for medicine.">
+  <div class="about-container">
+
+    <!-- ===== INTRO SECTION ===== -->
+    <section class="about-hero">
+      <div class="photo-wrapper">
+        <img src="/james.jpeg" alt="James Weatherhead" class="photo" />
+      </div>
+
+      <h1 class="about-title">About</h1>
+
+      <p class="about-lede">
+        I'm James Weatherhead. I'm an MD/PhD/MPH student at the University of Texas Medical Branch
+        in Galveston, Texas. I build AI tools that work inside hospital systems, and I spend a lot
+        of time thinking about what happens when agents start doing real work autonomously.
+      </p>
+    </section>
+
+    <!-- ===== ORIGINS ===== -->
+    <section class="about-section">
+      <p>
+        I was born in London and lived there for 13 years before moving to Pretoria, South Africa,
+        where I attended Pretoria Boys High School. I came to the United States on a tennis
+        scholarship, first to the University of Indianapolis, then transferring to St. Mary's
+        University in San Antonio where I played NCAA tennis. I graduated in 2021 with a BS in
+        Biology and a minor in Chemistry.
+      </p>
+
+      <p>
+        Research started early for me. At St. Mary's, I was testing anti-cancer drugs on pediatric
+        sarcoma cell lines. Then I moved to UT Dell Medical School and ran a meta-analysis on deep
+        brain stimulation. I co-founded a STEM outreach organization and spent time volunteering at
+        the San Antonio Food Bank during COVID. That period clarified things. I wanted to be in
+        medicine, but I also wanted to build.
+      </p>
+    </section>
+
+    <!-- ===== THE INTERSECTION ===== -->
+    <section class="about-section">
+      <div class="section-marker"></div>
+
+      <p>
+        At UTMB, I found the intersection that drives everything I do now: medicine and AI.
+        My PhD work is in Pathology and Experimental Pathology (expected June 2027), and I'm
+        simultaneously pursuing my MD (through 2029) and MPH. I started building tools almost
+        immediately.
+      </p>
+
+      <p>
+        I work under Peter McCaffrey, MD, who serves as Chief AI Officer at UTMB. Together we're
+        building AI systems for clinical use. Some of what I've built or am building:
+      </p>
+
+      <ul class="about-list">
+        <li>
+          A semantic search tool for clinicians to find medical content using natural language.
+          Presented at Perplexity AI headquarters in San Francisco.
+        </li>
+        <li>
+          A literature retrieval pipeline that pulls relevant references for specific patient
+          cases, used by our Pathology Department for clinical decisions.
+        </li>
+        <li>
+          <a href="https://github.com/JamesWeatherhead/receipts" target="_blank" rel="noopener noreferrer">receipts</a>:
+          citation verification for Claude Code. Reads your manuscript and sources, flags where
+          claims and references don't match.
+        </li>
+        <li>
+          <a href="https://github.com/JamesWeatherhead/ehrsh" target="_blank" rel="noopener noreferrer">ehrsh</a>:
+          a natural language shell for FHIR-based EHR systems. Plain English in, structured API calls out.
+        </li>
+        <li>
+          <a href="https://github.com/JamesWeatherhead/asq-phi" target="_blank" rel="noopener noreferrer">ASQ-PHI</a>:
+          a synthetic benchmark of 1,051 PHI-annotated clinical queries for evaluating
+          de-identification at the LLM boundary. Published in <em>Data in Brief</em>.
+        </li>
+        <li>
+          <a href="https://github.com/JamesWeatherhead/VibeRad" target="_blank" rel="noopener noreferrer">VibeRad</a>:
+          a DICOM viewer built on Google AI Studio and Gemini for radiology exploration.
+        </li>
+      </ul>
+
+      <p>
+        In Summer 2025, I was an AI Researcher at <a href="https://www.thrive.ai" target="_blank" rel="noopener noreferrer">Thrive AI Health</a> in
+        San Francisco, an AI health coaching platform that helps people build personalized health
+        habits. I've presented at Retool Summit, Perplexity AI HQ, and the Digital Pathology
+        Association Conference. I participated in the UTMB-Microsoft AI Hackathon building
+        NLP-based medical imaging cohort discovery.
+      </p>
+    </section>
+
+    <!-- ===== WHAT DRIVES HIM ===== -->
+    <section class="about-section">
+      <div class="section-marker"></div>
+
+      <p>
+        Here is what I actually care about: I want to build an AI agent that anyone can use for
+        their health. Including my mom. That's the bar.
+      </p>
+
+      <p>
+        I believe the future is multi-agent, and that medical AI needs people who understand both
+        the clinical reality and the technical frontier. I'm not interested in building AI wrappers.
+        I'm interested in building AI that works inside the messy, regulated, high-stakes world of
+        real healthcare. The kind where a wrong answer has consequences and "good enough" isn't.
+      </p>
+    </section>
+
+    <!-- ===== BEYOND THE WORK ===== -->
+    <section class="about-section">
+      <div class="section-marker"></div>
+
+      <p>
+        Beyond the research and the code: I co-founded and co-lead the AI in Medicine Student
+        Organization at UTMB. I organize coding camps for K-12 students. I volunteer at
+        St. Vincent's Hope Clinic and with Street Medicine. I've served on the AMA Committee on
+        Health Information Technology and as a TMA Delegate.
+      </p>
+
+      <p>
+        I played competitive tennis for years. I grew up between London and South Africa. I now live in Galveston, Texas.
+      </p>
+    </section>
+
+    <!-- ===== GET IN TOUCH ===== -->
+    <section class="about-contact">
+      <h2 class="contact-heading">Get in touch</h2>
+
+      <p class="contact-text">
+        I'm always open to conversations about medical AI, agent systems, or interesting problems
+        in healthcare. The best way to reach me is email.
+      </p>
+
+      <div class="contact-links">
+        <a href={`mailto:${SOCIAL_LINKS.email}`} class="contact-link contact-link-email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="M22 4L12 13L2 4" />
+          </svg>
+          <span>{SOCIAL_LINKS.email}</span>
+        </a>
+
+        <div class="contact-social-row">
+          <a
+            href={SOCIAL_LINKS.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="GitHub"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+          <a
+            href={SOCIAL_LINKS.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="X (Twitter)"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a
+            href={SOCIAL_LINKS.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="LinkedIn"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a
+            href={SOCIAL_LINKS.kaggle}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="Kaggle"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.281.18.046.149.034.238-.036.27l-6.555 6.344 6.836 8.507c.095.104.117.208.075.323"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  /* ===== ABOUT PAGE LAYOUT ===== */
+  .about-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* ===== HERO / INTRO ===== */
+  .about-hero {
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+  }
+
+  .photo-wrapper {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    margin-bottom: 2rem;
+    transition: border-color 300ms ease, box-shadow 300ms ease;
+  }
+
+  :global(.dark) .photo-wrapper {
+    box-shadow: 0 0 20px rgba(74, 158, 255, 0.06);
+    border-color: rgba(74, 158, 255, 0.15);
+  }
+
+  .photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  .about-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin: 0 0 1.5rem 0;
+    color: var(--color-text-primary);
+  }
+
+  :global(.dark) .about-title {
+    text-shadow: 0 0 40px rgba(74, 158, 255, 0.15);
+  }
+
+  .about-lede {
+    font-family: var(--font-body);
+    font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 620px;
+  }
+
+  /* ===== BODY SECTIONS ===== */
+  .about-section {
+    padding: 1.75rem 0;
+  }
+
+  .about-section p {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text-primary);
+    margin: 0 0 1.25rem 0;
+  }
+
+  .about-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-marker {
+    width: 32px;
+    height: 1px;
+    background: var(--color-border);
+    margin-bottom: 1.75rem;
+    transition: background-color 300ms ease, box-shadow 300ms ease;
+  }
+
+  :global(.dark) .section-marker {
+    background: rgba(74, 158, 255, 0.25);
+    box-shadow: 0 0 8px rgba(74, 158, 255, 0.1);
+  }
+
+  /* ===== LISTS ===== */
+  .about-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .about-list li {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text-primary);
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    position: relative;
+  }
+
+  .about-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.05rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    transition: background-color 300ms ease;
+  }
+
+  .about-list li a {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+  }
+
+  /* ===== CONTACT SECTION ===== */
+  .about-contact {
+    padding-top: 2rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--color-border);
+    transition: border-color 300ms ease;
+  }
+
+  :global(.dark) .about-contact {
+    border-color: rgba(74, 158, 255, 0.1);
+  }
+
+  .contact-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 1rem 0;
+  }
+
+  .contact-text {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text-primary);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+
+  .contact-link-email:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .contact-social-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-top: 0.25rem;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .about-hero {
+      padding-top: 3.5rem;
+    }
+
+    .photo-wrapper {
+      width: 120px;
+      height: 120px;
+    }
+
+    .about-section p,
+    .about-list li,
+    .contact-text {
+      font-size: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,109 @@
+---
+import ThemeToggle from './ThemeToggle.tsx';
+import { SITE_TITLE } from '../consts';
+
+const pathname = Astro.url.pathname;
+const navLinks = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header
+  class="header"
+  style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background: var(--color-nav-bg); border-bottom: 1px solid var(--color-border); transition: background 300ms ease, border-color 300ms ease;"
+>
+  <nav
+    style="max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between;"
+  >
+    <!-- Site title -->
+    <a
+      href="/"
+      style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; color: var(--color-text-primary); text-decoration: none; transition: color 200ms ease;"
+    >
+      {SITE_TITLE}
+    </a>
+
+    <!-- Nav links + toggle -->
+    <div style="display: flex; align-items: center; gap: 2rem;">
+      <!-- Desktop nav -->
+      <ul class="desktop-nav" style="display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class={`nav-link ${pathname.startsWith(link.href) ? 'active' : ''}`}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Theme toggle -->
+      <ThemeToggle client:load />
+
+      <!-- Mobile menu button -->
+      <button
+        class="mobile-menu-btn"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        style="display: none; background: none; border: none; cursor: pointer; padding: 0.25rem; color: var(--color-text-secondary);"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7" class="menu-line-1" />
+          <line x1="4" y1="12" x2="20" y2="12" class="menu-line-2" />
+          <line x1="4" y1="17" x2="20" y2="17" class="menu-line-3" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav drawer -->
+  <div
+    class="mobile-nav"
+    style="display: none; padding: 0 1.5rem 1rem; border-top: 1px solid var(--color-border);"
+  >
+    <ul style="list-style: none; margin: 0; padding: 0.5rem 0 0 0; display: flex; flex-direction: column; gap: 0.75rem;">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={`nav-link ${pathname.startsWith(link.href) ? 'active' : ''}`}
+            style="font-size: 1.1rem;"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div style="height: 65px;" aria-hidden="true"></div>
+
+<style>
+  @media (max-width: 640px) {
+    .desktop-nav {
+      display: none !important;
+    }
+    .mobile-menu-btn {
+      display: block !important;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector('.mobile-menu-btn');
+  const mobileNav = document.querySelector('.mobile-nav');
+
+  if (btn && mobileNav) {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      (mobileNav as HTMLElement).style.display = expanded ? 'none' : 'block';
+    });
+  }
+</script>

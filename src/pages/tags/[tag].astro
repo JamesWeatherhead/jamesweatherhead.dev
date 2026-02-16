@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-// Generate static paths for all unique tags
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
   const uniqueTags = new Set<string>();
@@ -22,8 +21,7 @@ export async function getStaticPaths() {
 const { tag } = Astro.params;
 const { tagName } = Astro.props;
 
-// Get all posts and filter by tag (case-insensitive)
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const filteredPosts = allPosts
   .filter(post => post.data.tags.some(t => t.toLowerCase() === tag))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -36,71 +34,54 @@ function formatDate(date: Date) {
   }).format(date);
 }
 
-// Find the original tag name with proper casing
 const displayTag = filteredPosts[0]?.data.tags.find(t => t.toLowerCase() === tag) || tagName;
 ---
 
 <BaseLayout title={`Posts tagged: ${displayTag}`} description={`All posts tagged with ${displayTag}`}>
-  <div class="max-w-4xl mx-auto">
-    <!-- Back to all tags -->
-    <div class="mb-8">
+  <div style="max-width: 720px; margin: 0 auto; padding: 0 1.5rem;">
+
+    <div style="padding: 2rem 0 1rem;">
       <a
         href="/tags"
-        class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
+        style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-accent); text-decoration: none;"
       >
-        ← Back to all tags
+        &larr; All tags
       </a>
     </div>
 
-    <div class="mb-12">
-      <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-        Posts tagged: <span class="text-blue-600 dark:text-blue-400">{displayTag}</span>
+    <section style="padding: 1rem 0 2rem;">
+      <h1 style="font-family: var(--font-display); font-weight: 400; font-size: clamp(1.5rem, 4vw, 2.25rem); line-height: 1.2; margin: 0 0 0.5rem 0; color: var(--color-text-primary);">
+        {displayTag}
       </h1>
-      <p class="text-lg text-gray-600 dark:text-gray-400">
-        {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'} found
+      <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-secondary);">
+        {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'}
       </p>
-    </div>
+    </section>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {filteredPosts.map((post) => (
-        <article class="group">
+    <section style="padding: 0 0 4rem;">
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        {filteredPosts.map((post) => (
           <a
             href={`/blog/${post.slug}`}
-            class="block h-full p-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800/50 hover:border-blue-500 dark:hover:border-blue-400 transition-all hover:shadow-lg"
+            class="project-card"
+            style="text-decoration: none; color: inherit; display: block;"
           >
-            <div class="mb-3">
-              <time
-                datetime={post.data.pubDate.toISOString()}
-                class="text-sm text-gray-500 dark:text-gray-400"
-              >
-                {formatDate(post.data.pubDate)}
-              </time>
-            </div>
-
-            <h2 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <time
+              datetime={post.data.pubDate.toISOString()}
+              style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-secondary);"
+            >
+              {formatDate(post.data.pubDate)}
+            </time>
+            <h2 style="font-family: var(--font-display); font-weight: 500; font-size: 1.15rem; margin: 0.3rem 0 0.4rem 0; color: var(--color-text-primary);">
               {post.data.title}
             </h2>
-
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
+            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">
               {post.data.description}
             </p>
-
-            {post.data.tags.length > 0 && (
-              <div class="flex flex-wrap gap-2">
-                {post.data.tags.map((t) => (
-                  <span class="inline-block px-3 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <div class="mt-4 text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
-              Read more →
-            </div>
           </a>
-        </article>
-      ))}
-    </div>
+        ))}
+      </div>
+    </section>
+
   </div>
 </BaseLayout>

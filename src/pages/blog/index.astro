@@ -1,10 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import TagFilter from '../../components/TagFilter.astro';
 
-// Fetch all blog posts and sort by date (newest first)
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = allPosts.sort((a, b) =>
   b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
@@ -18,59 +16,57 @@ function formatDate(date: Date) {
 }
 ---
 
-<BaseLayout title="Blog" description="Explore articles about web development, Astro, and more">
-  <div class="max-w-4xl mx-auto">
-    <div class="mb-12">
-      <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Blog</h1>
-      <p class="text-lg text-gray-600 dark:text-gray-400">
-        Thoughts on web development, design, and technology
-      </p>
-    </div>
+<BaseLayout title="Blog" description="Writing on clinical AI, agent systems, privacy, and the intersection of medicine and code.">
+  <div style="max-width: 720px; margin: 0 auto; padding: 0 1.5rem;">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {sortedPosts.map((post) => (
-        <article class="group">
-          <a
-            href={`/blog/${post.slug}`}
-            class="block h-full p-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800/50 hover:border-blue-500 dark:hover:border-blue-400 transition-all hover:shadow-lg"
-          >
-            <div class="mb-3">
+    <section style="padding: 4rem 0 2rem;">
+      <h1 style="font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 1rem 0; color: var(--color-text-primary);">
+        Blog
+      </h1>
+      <p style="font-family: var(--font-body); font-size: 1.05rem; color: var(--color-text-secondary); margin: 0; line-height: 1.6;">
+        Writing on clinical AI, agent systems, and the intersection of medicine and code.
+      </p>
+    </section>
+
+    <section style="padding: 1rem 0 4rem;">
+      {sortedPosts.length > 0 ? (
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+          {sortedPosts.map((post) => (
+            <a
+              href={`/blog/${post.slug}`}
+              class="project-card"
+              style="text-decoration: none; color: inherit; display: block;"
+            >
               <time
                 datetime={post.data.pubDate.toISOString()}
-                class="text-sm text-gray-500 dark:text-gray-400"
+                style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-secondary);"
               >
                 {formatDate(post.data.pubDate)}
               </time>
-            </div>
+              <h2 style="font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; margin: 0.4rem 0 0.5rem 0; color: var(--color-text-primary);">
+                {post.data.title}
+              </h2>
+              <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">
+                {post.data.description}
+              </p>
+              {post.data.tags.length > 0 && (
+                <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.75rem;">
+                  {post.data.tags.map((tag: string) => (
+                    <span class="tag-pill">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div style="padding: 2rem 0;">
+          <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text-secondary); font-style: italic; margin: 0;">
+            Writing in progress. Check back soon.
+          </p>
+        </div>
+      )}
+    </section>
 
-            <h2 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              {post.data.title}
-            </h2>
-
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
-              {post.data.description}
-            </p>
-
-            {post.data.tags.length > 0 && (
-              <div class="flex flex-wrap gap-2" onclick="event.stopPropagation();">
-                {post.data.tags.map((tag) => (
-                  <TagFilter tag={tag} />
-                ))}
-              </div>
-            )}
-
-            <div class="mt-4 text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
-              Read more →
-            </div>
-          </a>
-        </article>
-      ))}
-    </div>
-
-    {sortedPosts.length === 0 && (
-      <div class="text-center py-12 text-gray-500 dark:text-gray-400">
-        <p class="text-lg">No blog posts yet. Check back soon!</p>
-      </div>
-    )}
   </div>
 </BaseLayout>

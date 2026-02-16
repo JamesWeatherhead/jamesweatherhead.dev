@@ -1,10 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import TagFilter from '../../components/TagFilter.astro';
 
-// Get all posts and extract tags with counts
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const tagCounts = new Map<string, number>();
 
 allPosts.forEach(post => {
@@ -13,30 +11,38 @@ allPosts.forEach(post => {
   });
 });
 
-// Sort tags by count descending
 const sortedTags = Array.from(tagCounts.entries())
   .sort((a, b) => b[1] - a[1]);
 ---
 
-<BaseLayout title="Tags" description="Browse blog posts by tag">
-  <div class="max-w-4xl mx-auto">
-    <div class="mb-12">
-      <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Tags</h1>
-      <p class="text-lg text-gray-600 dark:text-gray-400">
-        Explore posts organized by topic
-      </p>
-    </div>
+<BaseLayout title="Tags" description="Browse posts by topic.">
+  <div style="max-width: 720px; margin: 0 auto; padding: 0 1.5rem;">
 
-    {sortedTags.length > 0 ? (
-      <div class="flex flex-wrap gap-3">
-        {sortedTags.map(([tag, count]) => (
-          <TagFilter tag={tag} count={count} />
-        ))}
-      </div>
-    ) : (
-      <div class="text-center py-12 text-gray-500 dark:text-gray-400">
-        <p class="text-lg">No tags yet. Check back soon!</p>
-      </div>
-    )}
+    <section style="padding: 4rem 0 2rem;">
+      <h1 style="font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 1rem 0; color: var(--color-text-primary);">
+        Tags
+      </h1>
+    </section>
+
+    <section style="padding: 1rem 0 4rem;">
+      {sortedTags.length > 0 ? (
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          {sortedTags.map(([tag, count]) => (
+            <a
+              href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+              class="tag-pill"
+              style="text-decoration: none;"
+            >
+              {tag} ({count})
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text-secondary); font-style: italic;">
+          No tags yet.
+        </p>
+      )}
+    </section>
+
   </div>
 </BaseLayout>
