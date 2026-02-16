@@ -31,16 +31,19 @@ function getStatusClass(status: string): string {
       </p>
     </section>
 
-    {tools.length > 0 && (
+    {research.length > 0 && (
       <section style="padding: 1rem 0 2rem;">
-        <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.4rem; color: var(--color-text-primary); margin: 0 0 1rem 0;">
-          Tools
+        <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.4rem; color: var(--color-text-primary); margin: 0 0 0.5rem 0;">
+          Research
         </h2>
+        <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin: 0 0 1rem 0; line-height: 1.5;">
+          A coordinated research program on PHI protection and re-identification risk in LLM-based clinical systems.
+        </p>
         <div
           class="project-grid"
           style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;"
         >
-          {tools.map((project) => (
+          {research.map((project) => (
             <a
               href={project.url}
               target="_blank"
@@ -74,19 +77,16 @@ function getStatusClass(status: string): string {
       </section>
     )}
 
-    {research.length > 0 && (
+    {tools.length > 0 && (
       <section style="padding: 1rem 0 4rem;">
-        <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.4rem; color: var(--color-text-primary); margin: 0 0 0.5rem 0;">
-          Research
+        <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.4rem; color: var(--color-text-primary); margin: 0 0 1rem 0;">
+          Tools
         </h2>
-        <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin: 0 0 1rem 0; line-height: 1.5;">
-          A coordinated research program on PHI protection and re-identification risk in LLM-based clinical systems.
-        </p>
         <div
           class="project-grid"
           style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;"
         >
-          {research.map((project) => (
+          {tools.map((project) => (
             <a
               href={project.url}
               target="_blank"
