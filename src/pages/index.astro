@@ -1,91 +1,130 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_TITLE, SITE_DESCRIPTION, SOCIAL_LINKS, PROJECTS } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION, SOCIAL_LINKS } from '../consts';
+import { getCollection } from 'astro:content';
 
-// Select featured projects (first 4)
-const featured = PROJECTS.slice(0, 4);
+const blogEntries = await getCollection('blog');
+const latestPosts = blogEntries
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
-function getStatusClass(status: string): string {
-  const map: Record<string, string> = {
-    active: 'status-active',
-    published: 'status-published',
-    competition: 'status-competition',
-    research: 'status-research',
-  };
-  return map[status] || 'status-research';
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
 }
+
+const timeline = [
+  {
+    years: '2023 ~ Present',
+    org: 'University of Texas Medical Branch',
+    location: 'Galveston, TX',
+    role: 'MD/PhD/MPH Student',
+    description:
+      'PhD in Pathology & Experimental Pathology under Peter McCaffrey, MD (Chief AI Officer). Building AI tools for clinical systems.',
+  },
+  {
+    years: 'Summer 2025',
+    org: 'Thrive AI Health',
+    location: 'San Francisco, CA',
+    role: 'AI Researcher',
+    description: 'AI health coaching platform.',
+  },
+  {
+    years: '2021',
+    org: "St. Mary's University",
+    location: 'San Antonio, TX',
+    role: 'BS Biology, Minor Chemistry',
+    description:
+      'NCAA Tennis. Research: anti-cancer drugs on pediatric sarcoma cell lines.',
+  },
+  {
+    years: '2019 ~ 2021',
+    org: 'University of Indianapolis',
+    location: 'Indianapolis, IN',
+    role: 'Tennis Scholarship',
+    description: "Transferred to St. Mary's.",
+  },
+  {
+    years: '2008 ~ 2017',
+    org: 'Pretoria Boys High School',
+    location: 'South Africa',
+    role: '',
+    description: '',
+  },
+  {
+    years: 'Born',
+    org: 'London, England',
+    location: '',
+    role: '',
+    description: 'Lived there 13 years.',
+  },
+];
+
+const talks = [
+  {
+    title: 'Building Clinical AI Tools',
+    event: 'Retool Summit',
+    videoUrl: 'https://www.youtube.com/watch?v=Di7O9hJg1aM',
+    thumbnail: 'https://img.youtube.com/vi/Di7O9hJg1aM/maxresdefault.jpg',
+  },
+  {
+    title: 'Semantic Search for Clinicians',
+    event: 'Perplexity AI HQ, San Francisco',
+    videoUrl: null,
+    thumbnail: null,
+  },
+  {
+    title: 'AI in Clinical Pathology',
+    event: 'Digital Pathology Association Conference',
+    videoUrl: null,
+    thumbnail: null,
+  },
+];
 ---
 
 <BaseLayout title="James Weatherhead">
-  <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+  <div class="page-container">
 
-    <!-- ===== HERO SECTION ===== -->
-    <section style="padding: 6rem 0 4rem; max-width: 720px;">
-      <h1
-        class="hero-title"
-        style="font-family: var(--font-display); font-weight: 400; font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 0 0 1.25rem 0; color: var(--color-text-primary);"
-      >
-        {SITE_TITLE}
-      </h1>
-      <p
-        class="hero-subtitle"
-        style="font-family: var(--font-body); font-size: clamp(1.1rem, 2.5vw, 1.35rem); line-height: 1.6; color: var(--color-text-secondary); margin: 0 0 2rem 0; max-width: 560px;"
-      >
-        {SITE_DESCRIPTION}
-      </p>
-
-      <!-- Social links row -->
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-        <a
-          href={SOCIAL_LINKS.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-link"
-          aria-label="GitHub"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-photo-wrapper">
+        <img
+          src="/james.jpeg"
+          alt="James Weatherhead"
+          class="hero-photo"
+          width="140"
+          height="140"
+        />
+      </div>
+      <h1 class="hero-name">{SITE_TITLE}</h1>
+      <p class="hero-tagline">{SITE_DESCRIPTION}</p>
+      <div class="hero-socials">
+        <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
           </svg>
         </a>
-        <a
-          href={SOCIAL_LINKS.twitter}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-link"
-          aria-label="X (Twitter)"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
           </svg>
         </a>
-        <a
-          href={SOCIAL_LINKS.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-link"
-          aria-label="LinkedIn"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
           </svg>
         </a>
-        <a
-          href={SOCIAL_LINKS.kaggle}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-link"
-          aria-label="Kaggle"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <a href={SOCIAL_LINKS.kaggle} target="_blank" rel="noopener noreferrer" aria-label="Kaggle" class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.281.18.046.149.034.238-.036.27l-6.555 6.344 6.836 8.507c.095.104.117.208.075.323"/>
           </svg>
         </a>
-        <a
-          href={`mailto:${SOCIAL_LINKS.email}`}
-          class="social-link"
-          aria-label="Email"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <a href={`mailto:${SOCIAL_LINKS.email}`} aria-label="Email" class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="4" width="20" height="16" rx="2" />
             <path d="M22 4L12 13L2 4" />
           </svg>
@@ -93,70 +132,567 @@ function getStatusClass(status: string): string {
       </div>
     </section>
 
-    <!-- ===== FEATURED PROJECTS ===== -->
-    <section style="padding: 2rem 0 3rem;">
-      <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.1rem; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 1.5rem 0;">
-        Featured Projects
-      </h2>
+    <!-- ===== BIO ===== -->
+    <section class="bio-section">
+      <p class="bio-text">
+        I am an MD/PhD student at UTMB building AI tools for clinical medicine.
+        My PhD focuses on applying language models to pathology and clinical decision support,
+        working under the Chief AI Officer. I have competed in NCAA tennis, published research
+        on pediatric sarcoma, and built open-source tools for EHR systems, clinical search,
+        and privacy-preserving AI. Originally from London, raised in South Africa.
+      </p>
+    </section>
 
-      <div
-        class="project-grid"
-        style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;"
-      >
-        {featured.map((project) => (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="project-card"
-            style="text-decoration: none; color: inherit; display: block;"
-          >
-            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
-              <span
-                style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--color-text-primary);"
-              >
-                {project.name}
-              </span>
-              <span class={`status-badge ${getStatusClass(project.status)}`}>
-                {project.status}
-              </span>
+    <!-- ===== TIMELINE ===== -->
+    <section class="section">
+      <h2 class="section-heading">Timeline</h2>
+      <div class="timeline">
+        {timeline.map((entry) => (
+          <div class="timeline-entry">
+            <div class="timeline-left">
+              <span class="timeline-years">{entry.years}</span>
             </div>
-            <p
-              style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin: 0 0 0.75rem 0; line-height: 1.5;"
-            >
-              {project.description}
-            </p>
-            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-              {project.tags.map((tag) => (
-                <span class="tag-pill">{tag}</span>
-              ))}
+            <div class="timeline-dot-col">
+              <div class="timeline-dot" />
+              <div class="timeline-line" />
             </div>
-          </a>
+            <div class="timeline-right">
+              <div class="timeline-org">{entry.org}</div>
+              {entry.location && <div class="timeline-location">{entry.location}</div>}
+              {entry.role && <div class="timeline-role">{entry.role}</div>}
+              {entry.description && <p class="timeline-desc">{entry.description}</p>}
+            </div>
+          </div>
         ))}
-      </div>
-
-      <div style="margin-top: 1.5rem;">
-        <a
-          href="/projects"
-          style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-accent); text-decoration: none; transition: opacity 200ms ease;"
-        >
-          View all projects &rarr;
-        </a>
       </div>
     </section>
 
-    <!-- ===== LATEST POSTS ===== -->
-    <section style="padding: 2rem 0 4rem;">
-      <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.1rem; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 1.5rem 0;">
-        Latest Posts
-      </h2>
+    <!-- ===== FEATURED TALKS ===== -->
+    <section class="section">
+      <h2 class="section-heading">Talks</h2>
+      <div class="talks-grid">
+        {talks.map((talk) => (
+          <div class="talk-card">
+            {talk.thumbnail && talk.videoUrl ? (
+              <a href={talk.videoUrl} target="_blank" rel="noopener noreferrer" class="talk-thumbnail-link">
+                <div class="talk-thumbnail-wrapper">
+                  <img src={talk.thumbnail} alt={talk.title} class="talk-thumbnail" loading="lazy" />
+                  <div class="play-overlay">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                      <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.6)" />
+                      <polygon points="19,15 35,24 19,33" fill="white" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            ) : (
+              <div class="talk-thumbnail-wrapper talk-placeholder">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="placeholder-icon">
+                  <rect x="2" y="3" width="20" height="14" rx="2" />
+                  <path d="M8 21h8" />
+                  <path d="M12 17v4" />
+                </svg>
+              </div>
+            )}
+            <div class="talk-info">
+              <h3 class="talk-title">{talk.title}</h3>
+              <span class="talk-event">{talk.event}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
 
-      <div style="padding: 2rem 0; text-align: left;">
-        <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text-secondary); font-style: italic; margin: 0;">
-          Writing in progress. Check back soon.
-        </p>
+    <!-- ===== LATEST WRITING ===== -->
+    <section class="section">
+      <h2 class="section-heading">Latest Writing</h2>
+      {latestPosts.length > 0 ? (
+        <div class="posts-list">
+          {latestPosts.map((post) => (
+            <a href={`/blog/${post.id}`} class="post-row">
+              <div class="post-meta">
+                <time class="post-date">{formatDate(post.data.pubDate)}</time>
+                {post.data.tags.length > 0 && (
+                  <div class="post-tags">
+                    {post.data.tags.slice(0, 3).map((tag) => (
+                      <span class="post-tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div class="post-content">
+                <h3 class="post-title">{post.data.title}</h3>
+                <p class="post-description">{post.data.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="empty-state">Writing in progress. Check back soon.</p>
+      )}
+      <div class="section-footer">
+        <a href="/blog" class="view-all-link">All posts &rarr;</a>
       </div>
     </section>
 
   </div>
 </BaseLayout>
+
+<style>
+  /* ===== PAGE CONTAINER ===== */
+  .page-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 5rem 0 3rem;
+  }
+
+  .hero-photo-wrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 3px solid var(--color-border);
+    transition: border-color 0.3s ease;
+  }
+
+  .hero-photo:hover {
+    border-color: var(--color-accent);
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 2.25rem;
+    line-height: 1.15;
+    margin: 0 0 0.6rem;
+    color: var(--color-text-primary);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0 0 1.5rem;
+    max-width: 440px;
+  }
+
+  .hero-socials {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--color-text-secondary);
+    transition: color 0.2s ease, background-color 0.2s ease;
+    text-decoration: none;
+  }
+
+  .social-icon:hover {
+    color: var(--color-accent);
+    background-color: var(--color-bg-secondary, rgba(0, 0, 0, 0.04));
+  }
+
+  :global(.dark) .social-icon:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  /* ===== BIO ===== */
+  .bio-section {
+    padding: 0 0 3rem;
+    text-align: center;
+  }
+
+  .bio-text {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin: 0 auto;
+    max-width: 580px;
+  }
+
+  /* ===== SECTION SHARED ===== */
+  .section {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 2rem;
+    text-align: center;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline-entry {
+    display: grid;
+    grid-template-columns: 140px 24px 1fr;
+    gap: 0 0.75rem;
+    min-height: 72px;
+  }
+
+  .timeline-left {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 2px;
+  }
+
+  .timeline-years {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .timeline-dot-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .timeline-line {
+    width: 1px;
+    flex: 1;
+    background-color: var(--color-border);
+    margin-top: 4px;
+  }
+
+  .timeline-entry:last-child .timeline-line {
+    display: none;
+  }
+
+  .timeline-right {
+    padding-bottom: 1.5rem;
+  }
+
+  .timeline-org {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+  }
+
+  .timeline-location {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.15rem;
+    letter-spacing: 0.02em;
+  }
+
+  .timeline-role {
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    color: var(--color-accent);
+    margin-top: 0.25rem;
+    font-weight: 500;
+  }
+
+  .timeline-desc {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    margin: 0.3rem 0 0;
+    line-height: 1.55;
+  }
+
+  /* ===== TALKS GRID ===== */
+  .talks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .talk-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .talk-thumbnail-link {
+    text-decoration: none;
+    display: block;
+  }
+
+  .talk-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-border);
+  }
+
+  .talk-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .talk-thumbnail-link:hover .talk-thumbnail {
+    transform: scale(1.04);
+  }
+
+  .play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+
+  .talk-thumbnail-link:hover .play-overlay {
+    opacity: 1;
+  }
+
+  .talk-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .placeholder-icon {
+    color: var(--color-text-secondary);
+    opacity: 0.4;
+  }
+
+  .talk-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .talk-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .talk-event {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== POSTS LIST ===== */
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .post-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.25rem 0;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color 0.15s ease;
+  }
+
+  .post-row:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .post-row:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  :global(.dark) .post-row:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  .post-meta {
+    flex-shrink: 0;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+  }
+
+  .post-tag {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--color-accent);
+    background: rgba(15, 107, 138, 0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    text-transform: lowercase;
+  }
+
+  :global(.dark) .post-tag {
+    background: rgba(74, 158, 255, 0.1);
+  }
+
+  .post-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--color-text-primary);
+    margin: 0 0 0.3rem;
+    line-height: 1.35;
+  }
+
+  .post-description {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .empty-state {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    margin: 0;
+    text-align: center;
+    padding: 1.5rem 0;
+  }
+
+  .section-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .view-all-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .view-all-link:hover {
+    opacity: 0.7;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .hero {
+      padding: 3.5rem 0 2rem;
+    }
+
+    .hero-name {
+      font-size: 1.75rem;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+    }
+
+    .timeline-entry {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding-left: 2rem;
+      position: relative;
+    }
+
+    .timeline-left {
+      justify-content: flex-start;
+      padding-top: 0;
+    }
+
+    .timeline-dot-col {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    .talks-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .post-row {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .post-meta {
+      width: auto;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.75rem;
+    }
+  }
+</style>
