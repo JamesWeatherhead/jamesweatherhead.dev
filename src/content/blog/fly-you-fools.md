@@ -3,6 +3,7 @@ title: "\"Fly, You Fools\": The Moat Is in Routing, Not Weights"
 description: BloombergGPT spent $10M training custom weights. GPT-4 surpassed it in months. The lesson for clinical AI and everyone else.
 pubDate: 2026-02-15
 tags: ["ai", "orchestration", "clinical-ai", "strategy"]
+draft: true
 ---
 
 In the Mines of Moria, the Fellowship of the Ring encountered a Balrog - a demon of shadow and flame from an older age. They ran. At the Bridge of Khazad-dûm, Gandalf turned to face it. He did not do so to win. He did so to buy time. As the bridge crumbled and the Balrog dragged him into the abyss, Gandalf's final words to his companions were not a battle cry but a strategic imperative: "Fly, you fools!"
